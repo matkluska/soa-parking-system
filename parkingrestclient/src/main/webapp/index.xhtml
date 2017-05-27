@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head>
+    <title>Parking Meter Mock</title>
+</h:head>
+<h:body>
+    <h4>New Ticket:</h4>
+    <h:form>
+        <h:panelGrid columns="3">
+
+            <h:outputLabel for="parkingMeterId" value="Parking Meter: "/>
+            <h:selectOneMenu id="parkingMeterId" value="#{ticketMB.parkingMeterId}" required="true" requiredMessage="Parking meter id is required.">
+                <f:selectItems value="#{ticketMB.parkingMeterIds}" var="id" itemValue="#{id}" itemLabel="Nr. #{id}"/>
+            </h:selectOneMenu>
+            <h:message for="parkingMeterId" style="color:red"/>
+
+            <h:outputLabel for="carId" value="Car Id: "/>
+            <h:inputText value="#{ticketMB.carId}" id="carId" required="true" requiredMessage="Car id is required"/>
+            <h:message for="carId" style="color:red"/>
+
+            <h:outputLabel for="duration" value="Duration[min]: "/>
+            <h:inputText value="#{ticketMB.durationInMinutes}" id="duration" required="true"
+                         requiredMessage="Duration is required."/>
+            <h:message for="duration" style="color:red"/>
+
+            <h:commandButton value="Submit" action="#{ticketMB.sendData}"/>
+        </h:panelGrid>
+    </h:form>
+
+</h:body>
+</html>
