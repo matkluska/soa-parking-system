@@ -4,12 +4,12 @@
     <packaging>war</packaging>
 
     <parent>
-        <artifactId>ParkingSystem</artifactId>
+        <artifactId>parking-system</artifactId>
         <groupId>pl.edu.agh.soa</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>parking-meter-mock</artifactId>
-    <name>parking-meter-mock Maven Webapp</name>
+    <name>parking-meter-mock</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
