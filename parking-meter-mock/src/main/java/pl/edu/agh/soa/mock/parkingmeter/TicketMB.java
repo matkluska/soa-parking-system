@@ -17,19 +17,19 @@ import java.util.Objects;
  */
 @ManagedBean
 public class TicketMB {
-    private List<Integer> parkingMeterIds = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
-    private int parkingMeterId;
+    private List<Long> parkingMeterIds = Lists.newArrayList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L, 22L, 23L, 24L, 25L);
+    private long parkingMeterId;
     private String carId;
     private long durationInMinutes;
 
     @EJB
     private DataSender dataSender;
 
-    public int getParkingMeterId() {
+    public long getParkingMeterId() {
         return parkingMeterId;
     }
 
-    public void setParkingMeterId(int parkingMeterId) {
+    public void setParkingMeterId(long parkingMeterId) {
         this.parkingMeterId = parkingMeterId;
     }
 
@@ -49,11 +49,11 @@ public class TicketMB {
         this.durationInMinutes = durationInMinutes;
     }
 
-    public List<Integer> getParkingMeterIds() {
+    public List<Long> getParkingMeterIds() {
         return parkingMeterIds;
     }
 
-    public void setParkingMeterIds(List<Integer> parkingMeterIds) {
+    public void setParkingMeterIds(List<Long> parkingMeterIds) {
         this.parkingMeterIds = parkingMeterIds;
     }
 

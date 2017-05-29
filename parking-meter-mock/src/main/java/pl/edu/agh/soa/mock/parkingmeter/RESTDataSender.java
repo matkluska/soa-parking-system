@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 @Stateless
 public class RESTDataSender implements DataSender {
 
-    private static final String PARKING_SYSTEM_URI = "http://localhost:8080/parkingsystem";
+    private static final String PARKING_SYSTEM_URI = "http://localhost:8080/rest/parkingsystem";
     private static final String TICKET_PATH = "ticket";
     private Client client = ClientBuilder.newClient();
 

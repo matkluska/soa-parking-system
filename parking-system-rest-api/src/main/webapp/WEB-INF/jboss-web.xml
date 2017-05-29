@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>/rest/parkingsystem</context-root>
+</jboss-web>

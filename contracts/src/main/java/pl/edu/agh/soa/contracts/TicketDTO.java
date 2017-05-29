@@ -12,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 public class TicketDTO {
     @NonNull
-    private int parkingMeterId;
+    private long parkingMeterId;
     @NonNull
     private String carId;
     @NonNull
