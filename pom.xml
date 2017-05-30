@@ -19,6 +19,7 @@
         <module>contracts</module>
         <module>parking-system-core</module>
         <module>parking-system-api</module>
+        <module>parking-system-view</module>
     </modules>
 
     <dependencyManagement>

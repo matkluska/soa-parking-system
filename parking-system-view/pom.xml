@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>parking-system-view</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>parking-system-dashboard</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>pl.edu.agh.soa</groupId>
+            <artifactId>parking-system-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+        </dependency>
+    </dependencies>
+    <parent>
+        <artifactId>parking-system</artifactId>
+        <groupId>pl.edu.agh.soa.parking-system</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+</project>
