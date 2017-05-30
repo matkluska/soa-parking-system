@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>/parkingsensorsmock</context-root>
+</jboss-web>

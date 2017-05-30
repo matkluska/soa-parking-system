@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>pl.edu.agh.soa</groupId>
+    <groupId>pl.edu.agh.soa.parking-system</groupId>
     <artifactId>parking-system</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -15,11 +15,10 @@
     </properties>
 
     <modules>
-        <module>parking-meter-mock</module>
+        <module>parking-system-mocks</module>
         <module>contracts</module>
         <module>parking-system-core</module>
-        <module>parking-system-rest-api</module>
-        <module>parking-system-soap-api</module>
+        <module>parking-system-api</module>
     </modules>
 
     <dependencyManagement>
