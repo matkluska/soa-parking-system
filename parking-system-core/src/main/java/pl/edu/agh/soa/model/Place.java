@@ -43,7 +43,7 @@ public class Place {
         this.parkingMeter = parkingMeter;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "place")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
     public Ticket getTicket() {
         return ticket;
     }

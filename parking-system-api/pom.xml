@@ -19,11 +19,11 @@
             <artifactId>javaee-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>pl.edu.agh.soa</groupId>
+            <groupId>pl.edu.agh.soa.parking-system</groupId>
             <artifactId>contracts</artifactId>
         </dependency>
         <dependency>
-            <groupId>pl.edu.agh.soa</groupId>
+            <groupId>pl.edu.agh.soa.parking-system</groupId>
             <artifactId>parking-system-core</artifactId>
         </dependency>
     </dependencies>

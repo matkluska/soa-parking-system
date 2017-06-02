@@ -3,33 +3,21 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
 >
 <h:head>
-    <title>Parking Sensors Mock</title>
+    <title>Parking Dashboard</title>
 </h:head>
 <h:body>
-    <h4>Parking Sensors: </h4>
-    <table border="1">
-        <tr>
-            <th>Place ID</th>
-            <th>Command</th>
-        </tr>
-        <h:panelGroup>
-            <ui:repeat value="#{parkingSensorsMB.placeIds}" var="place">
-                <tr>
-                    <td>
-                        <h:outputText value="#{place}"/> <br/>
-                    </td>
-                    <td>
-                        <h:form>
-                            <h:commandButton action="#{parkingSensorsMB.togglePlace(place)}" value="Toggle"/>
-                        </h:form>
-                    </td>
-                </tr>
-            </ui:repeat>
-        </h:panelGroup>
-    </table>
-
+    <b:container>
+        <h2>Parking Dashboard</h2>
+        <b:dataTable value="#{dashboardMB.places}" var="place"
+                     pageLength="20"
+                     pageLengthMenu="20,50,75,100,125">
+            <b:dataTableColumn value="#{place.id}" label="Place Number"/>
+            <b:dataTableColumn value="#{place.busy}" label="Place State"/>
+            <b:dataTableColumn value="#{place.paid}" label="Ticket"/>
+        </b:dataTable>
+    </b:container>
 </h:body>
 </html>

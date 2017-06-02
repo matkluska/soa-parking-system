@@ -11,7 +11,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>pl.edu.agh.soa</groupId>
+            <groupId>pl.edu.agh.soa.parking-system</groupId>
             <artifactId>parking-system-core</artifactId>
         </dependency>
         <dependency>
@@ -22,11 +22,29 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.bootsfaces</groupId>
+            <artifactId>bootsfaces</artifactId>
+        </dependency>
     </dependencies>
     <parent>
         <artifactId>parking-system</artifactId>
         <groupId>pl.edu.agh.soa.parking-system</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
+    <build>
+        <finalName>parking-system-dashboard</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+    </build>
 
 </project>

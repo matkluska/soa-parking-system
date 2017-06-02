@@ -8,7 +8,13 @@ import pl.edu.agh.soa.model.Ticket;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Mateusz Kluska
@@ -37,5 +43,21 @@ public class DBParkingDAO implements ParkingDAO {
         boolean currentState = place.isBusy();
         place.setBusy(!currentState);
         em.merge(place);
+    }
+
+    @Override
+    public List<Place> findAllPlaces() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Place> cq = cb.createQuery(Place.class);
+        Root<Place> rootEntry = cq.from(Place.class);
+        cq.select(rootEntry);
+        CriteriaQuery<Place> all = cq.orderBy(cb.asc(rootEntry.get("placeId")));
+        TypedQuery<Place> allQuery = em.createQuery(all);
+        return allQuery.getResultList();
+    }
+
+    @Override
+    public Optional<Place> findOnePlaceById(long placeId) {
+        return Optional.ofNullable(em.find(Place.class, placeId));
     }
 }

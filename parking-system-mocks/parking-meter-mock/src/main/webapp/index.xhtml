@@ -2,34 +2,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:b="http://bootsfaces.net/ui"
 >
 <h:head>
     <title>Parking Meter Mock</title>
 </h:head>
 <h:body>
-    <h4>New Ticket:</h4>
-    <h:form>
-        <h:panelGrid columns="3">
+    <b:container>
+        <h3>New Ticket:</h3>
+        <b:form>
+            <!--<b:panelGrid columns="3">-->
+            <b:row>
+                <b:column mediumScreen="2">
+                    <h:outputLabel for="parkingMeterId" value="Parking Meter: "/>
+                </b:column>
+                <b:column mediumScreen="4">
+                    <b:selectOneMenu id="parkingMeterId" value="#{ticketMB.parkingMeterId}" required="true"
+                                     requiredMessage="Parking meter id is required.">
+                        <f:selectItems value="#{ticketMB.parkingMeterIds}" var="id" itemValue="#{id}"
+                                       itemLabel="Nr. #{id}"/>
+                    </b:selectOneMenu>
+                </b:column>
+                <b:column mediumScreen="4">
+                    <b:message for="parkingMeterId" style="color:red"/>
+                </b:column>
+            </b:row>
 
-            <h:outputLabel for="parkingMeterId" value="Parking Meter: "/>
-            <h:selectOneMenu id="parkingMeterId" value="#{ticketMB.parkingMeterId}" required="true" requiredMessage="Parking meter id is required.">
-                <f:selectItems value="#{ticketMB.parkingMeterIds}" var="id" itemValue="#{id}" itemLabel="Nr. #{id}"/>
-            </h:selectOneMenu>
-            <h:message for="parkingMeterId" style="color:red"/>
+            <b:row>
+                <b:column mediumScreen="2">
+                    <h:outputLabel for="carId" value="Car Id: "/>
+                </b:column>
+                <b:column mediumScreen="4">
+                    <b:inputText value="#{ticketMB.carId}" id="carId" required="true"
+                                 requiredMessage="Car id is required"/>
+                </b:column>
+                <b:column mediumScreen="4">
+                    <b:message for="carId" style="color:red"/>
+                </b:column>
+            </b:row>
 
-            <h:outputLabel for="carId" value="Car Id: "/>
-            <h:inputText value="#{ticketMB.carId}" id="carId" required="true" requiredMessage="Car id is required"/>
-            <h:message for="carId" style="color:red"/>
-
-            <h:outputLabel for="duration" value="Duration[min]: "/>
-            <h:inputText value="#{ticketMB.durationInMinutes}" id="duration" required="true"
-                         requiredMessage="Duration is required."/>
-            <h:message for="duration" style="color:red"/>
-
-            <h:commandButton value="Submit" action="#{ticketMB.sendData}"/>
-        </h:panelGrid>
-    </h:form>
-
+            <b:row>
+                <b:column mediumScreen="2">
+                    <h:outputLabel for="duration" value="Duration[min]: "/>
+                </b:column>
+                <b:column mediumScreen="4">
+                    <b:inputText value="#{ticketMB.durationInMinutes}" id="duration" required="true"
+                                 requiredMessage="Duration is required."
+                                 validatorMessage="Duration time must be greater than 0.">
+                        <f:validateLongRange minimum="1"/>
+                    </b:inputText>
+                </b:column>
+                <b:column mediumScreen="4">
+                    <b:message for="duration" style="color:red"/>
+                </b:column>
+            </b:row>
+            <b:row>
+                <b:column mediumScreen="2">
+                    <b:commandButton value="Submit" action="#{ticketMB.sendData}" look="primary"/>
+                </b:column>
+            </b:row>
+            <!--</b:panelGrid>-->
+        </b:form>
+    </b:container>
 </h:body>
 </html>

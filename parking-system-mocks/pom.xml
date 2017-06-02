@@ -15,7 +15,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>pl.edu.agh.soa</groupId>
+            <groupId>pl.edu.agh.soa.parking-system</groupId>
             <artifactId>contracts</artifactId>
         </dependency>
         <dependency>
@@ -29,6 +29,10 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.bootsfaces</groupId>
+            <artifactId>bootsfaces</artifactId>
         </dependency>
     </dependencies>
 

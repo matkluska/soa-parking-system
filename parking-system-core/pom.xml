@@ -18,12 +18,8 @@
             <artifactId>javaee-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>pl.edu.agh.soa</groupId>
+            <groupId>pl.edu.agh.soa.parking-system</groupId>
             <artifactId>contracts</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
         </dependency>
     </dependencies>
 
