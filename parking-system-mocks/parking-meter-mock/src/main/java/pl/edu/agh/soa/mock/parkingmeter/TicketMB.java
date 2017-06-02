@@ -1,14 +1,15 @@
 package pl.edu.agh.soa.mock.parkingmeter;
 
-import com.google.common.collect.Lists;
 import pl.edu.agh.soa.contracts.TicketDTO;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,13 +18,26 @@ import java.util.Objects;
  */
 @ManagedBean
 public class TicketMB {
-    private List<Long> parkingMeterIds = Lists.newArrayList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L, 22L, 23L, 24L, 25L);
+    private List<Long> parkingMeterIds = new ArrayList<>(25);
+    private List<Long> placeIds = new ArrayList<>(250);
     private long parkingMeterId;
+    private long placeId;
     private String carId;
     private long durationInMinutes;
 
     @EJB
     private ParkingMeterController parkingMeterController;
+
+    @PostConstruct
+    public void init() {
+        for (long i = 1L; i <= 250L; i++) {
+            placeIds.add(i);
+        }
+        for (long i = 1L; i <= 25L; i++) {
+            parkingMeterIds.add(i);
+        }
+
+    }
 
     public long getParkingMeterId() {
         return parkingMeterId;
@@ -57,6 +71,22 @@ public class TicketMB {
         this.parkingMeterIds = parkingMeterIds;
     }
 
+    public List<Long> getPlaceIds() {
+        return placeIds;
+    }
+
+    public void setPlaceIds(List<Long> placeIds) {
+        this.placeIds = placeIds;
+    }
+
+    public long getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(long placeId) {
+        this.placeId = placeId;
+    }
+
     public void sendData() throws IOException {
         if (Objects.nonNull(carId) && parkingMeterId != 0
                 && durationInMinutes != 0) {
@@ -74,6 +104,7 @@ public class TicketMB {
                 .carId(carId)
                 .durationInMinutes(durationInMinutes)
                 .parkingMeterId(parkingMeterId)
+                .placeId(placeId)
                 .startTimeInMinutes(currentMinutes)
                 .build();
     }

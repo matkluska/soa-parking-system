@@ -37,7 +37,7 @@ public class Ticket {
         this.parkingMeter = parkingMeter;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PLACE_ID")
     public Place getPlace() {
         return place;

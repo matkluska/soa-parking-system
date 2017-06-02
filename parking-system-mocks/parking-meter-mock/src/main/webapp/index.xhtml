@@ -31,6 +31,22 @@
 
             <b:row>
                 <b:column mediumScreen="2">
+                    <h:outputLabel for="placeId" value="Place: "/>
+                </b:column>
+                <b:column mediumScreen="4">
+                    <b:selectOneMenu id="placeId" value="#{ticketMB.placeId}" required="true"
+                                     requiredMessage="Place is required.">
+                        <f:selectItems value="#{ticketMB.placeIds}" var="placeId" itemValue="#{placeId}"
+                                       itemLabel="Nr. #{placeId}"/>
+                    </b:selectOneMenu>
+                </b:column>
+                <b:column mediumScreen="4">
+                    <b:message for="placeId" style="color:red"/>
+                </b:column>
+            </b:row>
+
+            <b:row>
+                <b:column mediumScreen="2">
                     <h:outputLabel for="carId" value="Car Id: "/>
                 </b:column>
                 <b:column mediumScreen="4">

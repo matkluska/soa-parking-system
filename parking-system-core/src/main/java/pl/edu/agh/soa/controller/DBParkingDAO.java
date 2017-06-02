@@ -8,10 +8,6 @@ import pl.edu.agh.soa.model.Ticket;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -28,9 +24,11 @@ public class DBParkingDAO implements ParkingDAO {
     @Override
     public void addTicket(TicketDTO ticketDTO) {
         ParkingMeter parkingMeter = em.getReference(ParkingMeter.class, ticketDTO.getParkingMeterId());
+        Place place = em.getReference(Place.class, ticketDTO.getPlaceId());
         Ticket ticket = new Ticket();
         ticket.setCarId(ticketDTO.getCarId());
         ticket.setParkingMeter(parkingMeter);
+        ticket.setPlace(place);
         ticket.setStartTimeInMinutes(ticketDTO.getStartTimeInMinutes());
         ticket.setDurationInMinutes(ticketDTO.getDurationInMinutes());
         parkingMeter.getTickets().add(ticket);
@@ -47,13 +45,16 @@ public class DBParkingDAO implements ParkingDAO {
 
     @Override
     public List<Place> findAllPlaces() {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Place> cq = cb.createQuery(Place.class);
-        Root<Place> rootEntry = cq.from(Place.class);
-        cq.select(rootEntry);
-        CriteriaQuery<Place> all = cq.orderBy(cb.asc(rootEntry.get("placeId")));
-        TypedQuery<Place> allQuery = em.createQuery(all);
-        return allQuery.getResultList();
+//        CriteriaBuilder cb = em.getCriteriaBuilder();
+//        CriteriaQuery<Place> cq = cb.createQuery(Place.class);
+//        Root<Place> rootEntry = cq.from(Place.class);
+//        cq.select(rootEntry);
+//        CriteriaQuery<Place> all = cq.orderBy(cb.asc(rootEntry.get("placeId")));
+//        TypedQuery<Place> allQuery = em.createQuery(all);
+//        return allQuery.getResultList();
+        return em.createNamedQuery("Place.findAll")
+                .setHint("javax.persistence.fetchgraph", em.getEntityGraph("placeWithTickets"))
+                .getResultList();
     }
 
     @Override

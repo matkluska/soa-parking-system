@@ -14,6 +14,8 @@ public class TicketDTO {
     @NonNull
     private long parkingMeterId;
     @NonNull
+    private long placeId;
+    @NonNull
     private String carId;
     @NonNull
     private long durationInMinutes;

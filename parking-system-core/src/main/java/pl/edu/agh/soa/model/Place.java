@@ -1,17 +1,24 @@
 package pl.edu.agh.soa.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Mateusz Kluska
  */
 @Entity
 @Table(schema = "parking")
+@NamedQueries({
+        @NamedQuery(name = "Place.findAll", query = "SELECT p from Place p")
+})
+@NamedEntityGraph(name = "placeWithTickets",
+        attributeNodes = @NamedAttributeNode(value = "tickets"))
 public class Place {
     private long placeId;
     private boolean isBusy;
     private ParkingMeter parkingMeter;
-    private Ticket ticket;
+    private Set<Ticket> tickets = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,12 +50,12 @@ public class Place {
         this.parkingMeter = parkingMeter;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
-    public Ticket getTicket() {
-        return ticket;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+    public Set<Ticket> getTickets() {
+        return tickets;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

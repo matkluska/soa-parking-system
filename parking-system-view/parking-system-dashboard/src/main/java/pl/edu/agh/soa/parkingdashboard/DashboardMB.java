@@ -6,8 +6,7 @@ import pl.edu.agh.soa.model.Place;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
-import java.util.List;
-import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
  */
 @ManagedBean
 public class DashboardMB {
-    private List<PlaceMB> places;
+    private Set<PlaceMB> places;
 
     @Inject
     private ParkingDAO parkingDAO;
@@ -24,19 +23,19 @@ public class DashboardMB {
     public void init() {
         places = parkingDAO.findAllPlaces().stream()
                 .map(this::toPlaceMB)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    public List<PlaceMB> getPlaces() {
+    public Set<PlaceMB> getPlaces() {
         return places;
     }
 
-    public void setPlaces(List<PlaceMB> places) {
+    public void setPlaces(Set<PlaceMB> places) {
         this.places = places;
     }
 
     private PlaceMB toPlaceMB(Place place) {
-        boolean isPaid = Objects.nonNull(place.getTicket());
+        boolean isPaid = !place.getTickets().isEmpty();
         return new PlaceMB(place.getPlaceId(), place.isBusy(), isPaid);
     }
 }

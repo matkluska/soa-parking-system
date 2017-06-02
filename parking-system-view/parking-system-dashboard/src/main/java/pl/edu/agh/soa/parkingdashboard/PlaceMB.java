@@ -43,4 +43,19 @@ public class PlaceMB {
     public void setPaid(boolean paid) {
         isPaid = paid;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PlaceMB placeMB = (PlaceMB) o;
+
+        return id == placeMB.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 }
