@@ -20,6 +20,7 @@
         <module>parking-system-core</module>
         <module>parking-system-api</module>
         <module>parking-system-view</module>
+        <module>parking-incident-detector</module>
     </modules>
 
     <dependencyManagement>
@@ -62,6 +63,11 @@
                 <artifactId>bootsfaces</artifactId>
                 <version>1.1.1</version>
                 <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mindrot</groupId>
+                <artifactId>jbcrypt</artifactId>
+                <version>0.4</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

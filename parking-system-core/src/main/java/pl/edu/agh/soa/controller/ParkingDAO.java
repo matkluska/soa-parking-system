@@ -1,6 +1,7 @@
 package pl.edu.agh.soa.controller;
 
 import pl.edu.agh.soa.contracts.TicketDTO;
+import pl.edu.agh.soa.model.ParkingUser;
 import pl.edu.agh.soa.model.Place;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface ParkingDAO {
     List<Place> findAllPlaces();
 
     Optional<Place> findOnePlaceById(long placeId);
+
+    void invalidateTicket(long ticketId);
+
+    List<ParkingUser> findUsersByArea(long areaId);
 }

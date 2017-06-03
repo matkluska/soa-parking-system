@@ -12,6 +12,7 @@ import java.util.Set;
 public class Area {
     private long areaId;
     private Set<ParkingMeter> parkingMeters = new HashSet<>();
+    private Set<ParkingUser> users = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,5 +32,14 @@ public class Area {
 
     public void setParkingMeters(Set<ParkingMeter> parkingMeters) {
         this.parkingMeters = parkingMeters;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
+    public Set<ParkingUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<ParkingUser> users) {
+        this.users = users;
     }
 }

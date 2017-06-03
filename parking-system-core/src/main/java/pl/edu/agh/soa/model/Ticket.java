@@ -14,6 +14,7 @@ public class Ticket {
     private String carId;
     private long durationInMinutes;
     private long startTimeInMinutes;
+    private boolean isValid;
 
 
     @Id
@@ -72,5 +73,13 @@ public class Ticket {
 
     public void setStartTimeInMinutes(long startTimeInMinutes) {
         this.startTimeInMinutes = startTimeInMinutes;
+    }
+
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
     }
 }

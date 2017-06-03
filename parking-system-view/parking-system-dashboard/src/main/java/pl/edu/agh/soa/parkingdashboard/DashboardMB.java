@@ -2,6 +2,7 @@ package pl.edu.agh.soa.parkingdashboard;
 
 import pl.edu.agh.soa.controller.ParkingDAO;
 import pl.edu.agh.soa.model.Place;
+import pl.edu.agh.soa.model.Ticket;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -35,7 +36,8 @@ public class DashboardMB {
     }
 
     private PlaceMB toPlaceMB(Place place) {
-        boolean isPaid = !place.getTickets().isEmpty();
+        boolean isPaid = place.getTickets().stream()
+                .anyMatch(Ticket::isValid);
         return new PlaceMB(place.getPlaceId(), place.isBusy(), isPaid);
     }
 }
