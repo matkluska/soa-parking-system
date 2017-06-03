@@ -5,13 +5,23 @@
 <web-app>
     <display-name>Parking System SOAP API</display-name>
     <servlet>
-        <servlet-name>PLaceSensorMockService</servlet-name>
+        <servlet-name>PlaceSensorMockService</servlet-name>
         <!--suppress WebProperties -->
         <servlet-class>pl.edu.agh.soa.parking_system.soap.PlaceSensorMockImpl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ParkingWebService</servlet-name>
+        <!--suppress WebProperties -->
+        <servlet-class>pl.edu.agh.soa.parking_system.soap.ParkingWebServiceImpl</servlet-class>
+    </servlet>
 
     <servlet-mapping>
-        <servlet-name>PLaceSensorMockService</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <servlet-name>PlaceSensorMockService</servlet-name>
+        <url-pattern>/sensors/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ParkingWebService</servlet-name>
+        <url-pattern>/areas/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>

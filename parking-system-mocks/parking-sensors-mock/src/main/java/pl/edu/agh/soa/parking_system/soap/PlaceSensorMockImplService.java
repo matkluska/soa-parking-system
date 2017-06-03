@@ -24,7 +24,7 @@ public class PlaceSensorMockImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8080/soap/parkingsystem?wsdl");
+            url = new URL("http://localhost:8080/soap/parkingsystem/sensors?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
