@@ -1,4 +1,4 @@
-package pl.edu.agh.soa.parking_system.rest;
+package pl.edu.agh.soa.parking_system.rest.controller;
 
 import pl.edu.agh.soa.contracts.TicketDTO;
 import pl.edu.agh.soa.controller.ParkingDAO;
@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 public class ParkingMeterResource {
 
     @Inject
-    ParkingDAO parkingDAO;
+    private ParkingDAO parkingDAO;
 
     @POST
     public void addTicket(TicketDTO ticket) {

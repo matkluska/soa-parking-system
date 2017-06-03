@@ -26,6 +26,10 @@
             <groupId>pl.edu.agh.soa.parking-system</groupId>
             <artifactId>parking-system-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
     </dependencies>
 
     <modules>
