@@ -48,8 +48,8 @@ public class TicketExpirationDetector implements MessageListener {
                         p.getParkingMeter().getArea().getAreaId()
                 )).orElse(new ArrayList<>());
                 parkingUser.forEach(u -> System.out.println(
-                        "Send message about place '" + place.map(Place::getPlaceId).orElse(0L)
-                                + "' to employee '" + u.getUsername() + "'"));
+                        "Send message about place '" + placeId + "' to employee '" + u.getUsername() + "'"));
+                parkingDAO.addIncident(placeId, parkingUser.stream().findAny().map(ParkingUser::getId).orElse(0L));
             }
         } catch (JMSException e) {
             e.printStackTrace();

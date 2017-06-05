@@ -18,7 +18,7 @@ public class ParkingSensorsMB {
 
     @PostConstruct
     public void init() {
-        for (long i = 1L; i <= 250L; i++) {
+        for (long i = 1L; i <= 125L; i++) {
             placeIds.add(i);
         }
     }

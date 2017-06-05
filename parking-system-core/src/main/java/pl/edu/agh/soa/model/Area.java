@@ -9,6 +9,9 @@ import java.util.Set;
  */
 @Entity
 @Table(schema = "parking")
+@NamedQueries({
+        @NamedQuery(name = "Area.getAreaIds", query = "select a.areaId from Area a")
+})
 public class Area {
     private long areaId;
     private Set<ParkingMeter> parkingMeters = new HashSet<>();

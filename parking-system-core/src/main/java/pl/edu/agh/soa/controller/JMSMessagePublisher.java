@@ -21,7 +21,7 @@ public class JMSMessagePublisher implements MessagePublisher {
     private Destination queue;
 
     @Override
-    public void publishTicket(long ticketId, long delayInMinutes, long ticketPlaceId) {
+    public void publishTicket(long ticketId, long delayInMillis, long ticketPlaceId) {
         try {
             try (QueueConnection connection = (QueueConnection) connectionFactory.createConnection("jmsuser", "test")) {
                 try (QueueSession session = connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE)) {
@@ -29,7 +29,7 @@ public class JMSMessagePublisher implements MessagePublisher {
                         TextMessage msg = session.createTextMessage();
                         msg.setLongProperty(TICKET_ID, ticketId);
                         msg.setLongProperty(TICKET_PLACE_ID, ticketPlaceId);
-                        producer.setDeliveryDelay(delayInMinutes * 60 * 1000);
+                        producer.setDeliveryDelay(delayInMillis);
                         producer.send(msg);
                     }
                 }

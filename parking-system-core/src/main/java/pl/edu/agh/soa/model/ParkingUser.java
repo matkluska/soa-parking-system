@@ -3,6 +3,8 @@ package pl.edu.agh.soa.model;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Mateusz Kluska
@@ -11,7 +13,9 @@ import javax.persistence.*;
 @Table(name = "parking_user", schema = "parking")
 @NamedQueries({
         @NamedQuery(name = "User.findByArea",
-                query = "select u from ParkingUser u where u.area = :area")
+                query = "select u from ParkingUser u where u.area = :area"),
+        @NamedQuery(name = "User.findWithIncidentsBefore",
+                query = "select u from ParkingUser u join fetch u.incidents i where i.timeInMillis > :time")
 })
 public class ParkingUser {
     private long id;
@@ -19,6 +23,7 @@ public class ParkingUser {
     private String password;
     private UserType userType;
     private Area area;
+    private Set<Incident> incidents = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,8 +50,7 @@ public class ParkingUser {
     }
 
     public void setPassword(String password) {
-        String encPass = BCrypt.hashpw(password, BCrypt.gensalt());
-        this.password = encPass;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     @Enumerated(EnumType.STRING)
@@ -67,5 +71,14 @@ public class ParkingUser {
 
     public void setArea(Area area) {
         this.area = area;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parkingUser")
+    public Set<Incident> getIncidents() {
+        return incidents;
+    }
+
+    public void setIncidents(Set<Incident> incidents) {
+        this.incidents = incidents;
     }
 }

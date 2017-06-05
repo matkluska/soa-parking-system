@@ -1,4 +1,6 @@
+pl/edu/agh/soa/parking_system/rest/controller/ParkingReportResource.class
 pl/edu/agh/soa/parking_system/rest/service/ParkingService.class
 pl/edu/agh/soa/parking_system/rest/controller/ParkingMeterResource.class
+pl/edu/agh/soa/parking_system/rest/service/ParkingReportService.class
 pl/edu/agh/soa/parking_system/rest/controller/ParkingResource.class
 pl/edu/agh/soa/parking_system/rest/ApplicationConfig.class

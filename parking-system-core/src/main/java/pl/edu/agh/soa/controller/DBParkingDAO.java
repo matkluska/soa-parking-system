@@ -36,13 +36,13 @@ public class DBParkingDAO implements ParkingDAO {
         ticket.setCarId(ticketDTO.getCarId());
         ticket.setParkingMeter(parkingMeter);
         ticket.setPlace(place);
-        ticket.setStartTimeInMinutes(ticketDTO.getStartTimeInMinutes());
-        ticket.setDurationInMinutes(ticketDTO.getDurationInMinutes());
+        ticket.setStartTimeInMillis(ticketDTO.getStartTimeInMinutes() * 60 * 1000);
+        ticket.setDurationInMillis(ticketDTO.getDurationInMinutes() * 60 * 1000);
         ticket.setValid(true);
         parkingMeter.getTickets().add(ticket);
         em.persist(ticket);
 
-        messagePublisher.publishTicket(ticket.getTicketId(), ticket.getDurationInMinutes(), place.getPlaceId());
+        messagePublisher.publishTicket(ticket.getTicketId(), ticket.getDurationInMillis(), place.getPlaceId());
     }
 
     @Override
@@ -84,4 +84,61 @@ public class DBParkingDAO implements ParkingDAO {
                 .getResultList();
     }
 
+    @Override
+    public void addIncident(long placeId, long userId) {
+        Place place = em.getReference(Place.class, placeId);
+        ParkingUser user = em.getReference(ParkingUser.class, userId);
+        Incident incident = new Incident();
+        incident.setPlace(place);
+        incident.setParkingUser(user);
+        incident.setTimeInMillis(System.currentTimeMillis());
+        em.persist(incident);
+    }
+
+    @Override
+    public List<Incident> findIncidentsAfter(long timeInMillis) {
+        return em.createNamedQuery("Incident.findAfter", Incident.class)
+                .setParameter("time", timeInMillis)
+                .getResultList();
+    }
+
+    @Override
+    public List<Ticket> findTicketsAfter(long timeInMillis) {
+        return em.createNamedQuery("Ticket.findAfter", Ticket.class)
+                .setParameter("time", timeInMillis)
+                .getResultList();
+    }
+
+    @Override
+    public List<ParkingUser> findUsersWithIncidentsAfter(long timeInMillis) {
+        return em.createNamedQuery("User.findWithIncidentsBefore", ParkingUser.class)
+                .setParameter("time", timeInMillis)
+                .getResultList();
+    }
+
+    @Override
+    public List<Place> findAllPlacesWithTicketsAfter(long timeInMillis) {
+        return em.createNamedQuery("Place.findAllWithTicketsAfter", Place.class)
+                .setParameter("time", timeInMillis)
+                .getResultList();
+    }
+
+    @Override
+    public List<Place> findAllPlacesWithIncidentsAfter(long timeInMillis) {
+        return em.createNamedQuery("Place.findAllWithIncidentsAfter", Place.class)
+                .setParameter("time", timeInMillis)
+                .getResultList();
+    }
+
+    @Override
+    public List<Long> getPlaceIds() {
+        return em.createNamedQuery("Place.getPlaceIds", Long.class)
+                .getResultList();
+    }
+
+    @Override
+    public List<Long> getAreaIds() {
+        return em.createNamedQuery("Area.getAreaIds", Long.class)
+                .getResultList();
+    }
 }

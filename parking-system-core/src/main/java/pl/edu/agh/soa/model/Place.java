@@ -10,7 +10,10 @@ import java.util.Set;
 @Entity
 @Table(schema = "parking")
 @NamedQueries({
-        @NamedQuery(name = "Place.findAll", query = "SELECT p from Place p")
+        @NamedQuery(name = "Place.findAll", query = "SELECT p from Place p"),
+        @NamedQuery(name = "Place.findAllWithIncidentsAfter", query = "SELECT p from Place p join fetch p.incidents i where i.timeInMillis > :time"),
+        @NamedQuery(name = "Place.findAllWithTicketsAfter", query = "SELECT p from Place p join fetch p.tickets t where t.startTimeInMillis > :time"),
+        @NamedQuery(name = "Place.getPlaceIds", query = "select p.placeId from Place p")
 })
 @NamedEntityGraph(name = "placeWithTickets",
         attributeNodes = @NamedAttributeNode(value = "tickets"))
@@ -19,6 +22,7 @@ public class Place {
     private boolean isBusy;
     private ParkingMeter parkingMeter;
     private Set<Ticket> tickets = new HashSet<>();
+    private Set<Incident> incidents = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,12 +54,21 @@ public class Place {
         this.parkingMeter = parkingMeter;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "place")
     public Set<Ticket> getTickets() {
         return tickets;
     }
 
     public void setTickets(Set<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "place")
+    public Set<Incident> getIncidents() {
+        return incidents;
+    }
+
+    public void setIncidents(Set<Incident> incidents) {
+        this.incidents = incidents;
     }
 }

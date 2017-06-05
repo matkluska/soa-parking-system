@@ -7,13 +7,17 @@ import javax.persistence.*;
  */
 @Entity
 @Table(schema = "parking")
+@NamedQueries({
+        @NamedQuery(name = "Ticket.findAfter",
+                query = "select t from Ticket t where t.startTimeInMillis > :time")
+})
 public class Ticket {
     private long ticketId;
     private ParkingMeter parkingMeter;
     private Place place;
     private String carId;
-    private long durationInMinutes;
-    private long startTimeInMinutes;
+    private long durationInMillis;
+    private long startTimeInMillis;
     private boolean isValid;
 
 
@@ -57,22 +61,22 @@ public class Ticket {
         this.carId = carId;
     }
 
-    @Column(name = "DURATION_IN_MINUTES")
-    public long getDurationInMinutes() {
-        return durationInMinutes;
+    @Column(name = "DURATION_IN_MILLIS")
+    public long getDurationInMillis() {
+        return durationInMillis;
     }
 
-    public void setDurationInMinutes(long durationInMinutes) {
-        this.durationInMinutes = durationInMinutes;
+    public void setDurationInMillis(long durationInMinutes) {
+        this.durationInMillis = durationInMinutes;
     }
 
-    @Column(name = "START_TIME_IN_MINUTES")
-    public long getStartTimeInMinutes() {
-        return startTimeInMinutes;
+    @Column(name = "START_TIME_IN_MILLIS")
+    public long getStartTimeInMillis() {
+        return startTimeInMillis;
     }
 
-    public void setStartTimeInMinutes(long startTimeInMinutes) {
-        this.startTimeInMinutes = startTimeInMinutes;
+    public void setStartTimeInMillis(long startTimeInMinutes) {
+        this.startTimeInMillis = startTimeInMinutes;
     }
 
     public boolean isValid() {
