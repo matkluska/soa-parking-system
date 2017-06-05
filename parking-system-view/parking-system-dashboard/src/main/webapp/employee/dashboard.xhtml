@@ -9,8 +9,16 @@
     <title>Parking Dashboard</title>
 </h:head>
 <h:body>
+    <b:navBar brand="Parking System" brandHref="dashboard.xhtml">
+        <b:navbarLinks>
+            <b:navLink value="Dashboard" href="dashboard.xhtml"/>
+            <b:navLink value="My Account" href="my_account.xhtml"/>
+        </b:navbarLinks>
+        <b:form styleClass="nav navbar-form navbar-right">
+                <b:commandButton value="Logout" action="#{accountMB.logout}"/>
+        </b:form>
+    </b:navBar>
     <b:container>
-        <h2>Parking Dashboard</h2>
         <b:dataTable value="#{dashboardMB.places}" var="place"
                      pageLength="20"
                      pageLengthMenu="20,50,75,100,125">

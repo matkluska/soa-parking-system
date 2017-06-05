@@ -8,6 +8,9 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -140,5 +143,25 @@ public class DBParkingDAO implements ParkingDAO {
     public List<Long> getAreaIds() {
         return em.createNamedQuery("Area.getAreaIds", Long.class)
                 .getResultList();
+    }
+
+    @Override
+    public Optional<ParkingUser> findUserByName(String username) {
+        return Optional.ofNullable(em.createNamedQuery("User.findByName", ParkingUser.class)
+                .setParameter("name", username)
+                .getSingleResult());
+    }
+
+    @Override
+    public void changeUserPassword(long userId, String password) {
+        ParkingUser user = em.find(ParkingUser.class, userId);
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-1");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        user.setPassword(Base64.getEncoder().encodeToString(md.digest(password.getBytes())));
+        em.merge(user);
     }
 }

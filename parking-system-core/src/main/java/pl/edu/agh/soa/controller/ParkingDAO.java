@@ -40,4 +40,8 @@ public interface ParkingDAO {
     List<Long> getPlaceIds();
 
     List<Long> getAreaIds();
+
+    Optional<ParkingUser> findUserByName(String username);
+
+    void changeUserPassword(long userId, String password);
 }

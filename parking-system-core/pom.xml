@@ -21,10 +21,6 @@
             <groupId>pl.edu.agh.soa.parking-system</groupId>
             <artifactId>contracts</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mindrot</groupId>
-            <artifactId>jbcrypt</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

@@ -1,8 +1,9 @@
 package pl.edu.agh.soa.model;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 import javax.persistence.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = "User.findByArea",
                 query = "select u from ParkingUser u where u.area = :area"),
+        @NamedQuery(name = "User.findByName",
+                query = "select u from ParkingUser u where u.username = :name"),
         @NamedQuery(name = "User.findWithIncidentsBefore",
                 query = "select u from ParkingUser u join fetch u.incidents i where i.timeInMillis > :time")
 })
@@ -50,7 +53,12 @@ public class ParkingUser {
     }
 
     public void setPassword(String password) {
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            this.password = Base64.getEncoder().encodeToString(md.digest(password.getBytes()));
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Enumerated(EnumType.STRING)
