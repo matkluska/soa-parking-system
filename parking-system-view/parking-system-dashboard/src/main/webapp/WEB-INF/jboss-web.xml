@@ -1,3 +1,4 @@
 <jboss-web>
     <context-root>/parkingdashboard</context-root>
+    <security-domain>parking</security-domain>
 </jboss-web>

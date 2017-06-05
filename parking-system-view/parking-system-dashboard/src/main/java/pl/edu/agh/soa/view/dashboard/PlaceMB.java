@@ -1,4 +1,4 @@
-package pl.edu.agh.soa.parkingdashboard;
+package pl.edu.agh.soa.view.dashboard;
 
 import javax.faces.bean.ManagedBean;
 

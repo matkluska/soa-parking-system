@@ -161,14 +161,10 @@ INSERT INTO place VALUES (123, FALSE, 25);
 INSERT INTO place VALUES (124, FALSE, 25);
 INSERT INTO place VALUES (125, FALSE, 25);
 
-INSERT INTO parking_user VALUES (1, '$2a$06$700VHT/5.5ZmfVGL8Z3jXOTF0RM7vtTAGkmMbOjQjUCJzTfD3tX1a', 'ADMIN', 'admin');
-INSERT INTO parking_user
-VALUES (2, '$2a$06$9.anfLOSFloMIs.g2/b1m.k8BE9BMk/29t8xgDvHQ9XuikwYEhfbe', 'EMPLOYEE', 'user1', 1);
-INSERT INTO parking_user
-VALUES (3, '$2a$06$9.anfLOSFloMIs.g2/b1m.k8BE9BMk/29t8xgDvHQ9XuikwYEhfbe', 'EMPLOYEE', 'user2', 2);
-INSERT INTO parking_user
-VALUES (4, '$2a$06$9.anfLOSFloMIs.g2/b1m.k8BE9BMk/29t8xgDvHQ9XuikwYEhfbe', 'EMPLOYEE', 'user3', 3);
-INSERT INTO parking_user
-VALUES (5, '$2a$06$9.anfLOSFloMIs.g2/b1m.k8BE9BMk/29t8xgDvHQ9XuikwYEhfbe', 'EMPLOYEE', 'user4', 4);
-INSERT INTO parking_user
-VALUES (6, '$2a$06$9.anfLOSFloMIs.g2/b1m.k8BE9BMk/29t8xgDvHQ9XuikwYEhfbe', 'EMPLOYEE', 'user5', 5);
+INSERT INTO parking_user VALUES (1, 'jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=', 'ADMIN', 'admin');
+INSERT INTO parking_user VALUES (2, 'WZRHGrsBESr8wYFZ9sx0tPURuZgG2lmzyvWpwXPKz8U=', 'EMPLOYEE', 'user1', 1);
+INSERT INTO parking_user VALUES (3, 'WZRHGrsBESr8wYFZ9sx0tPURuZgG2lmzyvWpwXPKz8U=', 'EMPLOYEE', 'user2', 2);
+INSERT INTO parking_user VALUES (4, 'WZRHGrsBESr8wYFZ9sx0tPURuZgG2lmzyvWpwXPKz8U=', 'EMPLOYEE', 'user3', 3);
+INSERT INTO parking_user VALUES (5, 'WZRHGrsBESr8wYFZ9sx0tPURuZgG2lmzyvWpwXPKz8U=', 'EMPLOYEE', 'user4', 4);
+INSERT INTO parking_user VALUES (6, 'WZRHGrsBESr8wYFZ9sx0tPURuZgG2lmzyvWpwXPKz8U=', 'EMPLOYEE', 'user5', 5);
+INSERT INTO parking_user VALUES (7, 'WZRHGrsBESr8wYFZ9sx0tPURuZgG2lmzyvWpwXPKz8U=', 'ADMIN', 'mati', 3);

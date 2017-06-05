@@ -1,4 +1,4 @@
-package pl.edu.agh.soa.parkingdashboard;
+package pl.edu.agh.soa.view.dashboard;
 
 import pl.edu.agh.soa.controller.ParkingDAO;
 import pl.edu.agh.soa.model.Place;
