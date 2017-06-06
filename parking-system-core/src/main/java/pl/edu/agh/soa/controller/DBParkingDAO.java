@@ -1,5 +1,7 @@
 package pl.edu.agh.soa.controller;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
 import pl.edu.agh.soa.contracts.TicketDTO;
 import pl.edu.agh.soa.model.*;
 
@@ -8,9 +10,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,6 +67,14 @@ public class DBParkingDAO implements ParkingDAO {
     }
 
     @Override
+    public List<Place> findAllPlacesFromArea(long areaId) {
+        return em.createNamedQuery("Place.findAllFromArea", Place.class)
+                .setParameter("area", areaId)
+                .setHint("javax.persistence.fetchgraph", em.getEntityGraph("placeWithTickets"))
+                .getResultList();
+    }
+
+    @Override
     public Optional<Place> findOnePlaceById(long placeId) {
         return Optional.ofNullable(em.find(Place.class, placeId));
     }
@@ -77,6 +84,12 @@ public class DBParkingDAO implements ParkingDAO {
         Ticket ticket = em.find(Ticket.class, ticketId);
         ticket.setValid(false);
         em.merge(ticket);
+    }
+
+    @Override
+    public List<ParkingUser> findAllUsers() {
+        return em.createNamedQuery("User.findAllUser", ParkingUser.class)
+                .getResultList();
     }
 
     @Override
@@ -155,13 +168,9 @@ public class DBParkingDAO implements ParkingDAO {
     @Override
     public void changeUserPassword(long userId, String password) {
         ParkingUser user = em.find(ParkingUser.class, userId);
-        MessageDigest md;
-        try {
-            md = MessageDigest.getInstance("SHA-1");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-        user.setPassword(Base64.getEncoder().encodeToString(md.digest(password.getBytes())));
+        byte[] result = DigestUtils.sha256(password);
+        String encPass = Base64.encodeBase64String(result);
+        user.setPassword(encPass);
         em.merge(user);
     }
 }

@@ -1,4 +1,4 @@
-package pl.edu.agh.soa.view.dashboard;
+package pl.edu.agh.soa.view.dashboard.account_management;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;

@@ -3,29 +3,42 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:b="http://bootsfaces.net/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 <h:head>
     <title>Parking Dashboard</title>
 </h:head>
 <h:body>
-    <b:navBar brand="Parking System" brandHref="dashboard.xhtml">
-        <b:navbarLinks>
-            <b:navLink value="Dashboard" href="dashboard.xhtml"/>
-            <b:navLink value="My Account" href="my_account.xhtml"/>
-        </b:navbarLinks>
-        <b:form styleClass="nav navbar-form navbar-right">
-                <b:commandButton value="Logout" action="#{accountMB.logout}"/>
-        </b:form>
-    </b:navBar>
-    <b:container>
-        <b:dataTable value="#{dashboardMB.places}" var="place"
-                     pageLength="20"
-                     pageLengthMenu="20,50,75,100,125">
-            <b:dataTableColumn value="#{place.id}" label="Place Number"/>
-            <b:dataTableColumn value="#{place.busy}" label="Place State"/>
-            <b:dataTableColumn value="#{place.paid}" label="Ticket"/>
-        </b:dataTable>
-    </b:container>
+    <f:view locale="#{languageMB.locale}">
+        <b:navBar brand="#{msg['parkingSystem']}" brandHref="dashboard.xhtml">
+            <b:navbarLinks>
+                <b:navLink value="#{msg['dashboard']}" href="/parkingdashboard/employee/dashboard.xhtml"/>
+                <b:navLink value="#{msg['myAccount']}" href="/parkingdashboard/employee/my_account.xhtml"/>
+                <c:if test="#{accountMB.admin}">
+                    <b:navLink value="#{msg['employees']}" href="/parkingdashboard/admin/employees.xhtml"/>
+                </c:if>
+            </b:navbarLinks>
+            <b:form styleClass="nav navbar-form navbar-right">
+                <b:commandButton value="#{msg['logout']}" action="#{accountMB.logout}"/>
+            </b:form>
+            <b:form styleClass="nav navbar-form navbar-right">
+                <b:selectOneMenu value="#{languageMB.locale}" onchange="submit()"
+                                 valueChangeListener="#{languageMB.countryLocaleCodeChanged}">
+                    <f:selectItems value="#{languageMB.countriesInMap}"/>
+                </b:selectOneMenu>
+            </b:form>
+        </b:navBar>
+        <!--<h:outputText value="#{msg['tmp']}"/>-->
+        <b:container>
+            <b:dataTable value="#{dashboardMB.places}" var="place"
+                         pageLength="20"
+                         pageLengthMenu="20,50,75,100,125">
+                <b:dataTableColumn value="#{place.id}" label="#{msg['placeNumber']}"/>
+                <b:dataTableColumn value="#{place.busy}" label="#{msg['placeState']}"/>
+                <b:dataTableColumn value="#{place.paid}" label="#{msg['paymentState']}"/>
+            </b:dataTable>
+        </b:container>
+    </f:view>
 </h:body>
 </html>

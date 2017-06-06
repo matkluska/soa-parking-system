@@ -1,8 +1,10 @@
-package pl.edu.agh.soa.view.dashboard;
+package pl.edu.agh.soa.view.dashboard.account_management;
 
 import pl.edu.agh.soa.controller.ParkingDAO;
 import pl.edu.agh.soa.model.ParkingUser;
+import pl.edu.agh.soa.model.UserType;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -12,11 +14,34 @@ import javax.inject.Inject;
  */
 @ManagedBean
 public class AccountMB {
+    private String username;
+    private long userId;
     private String newPass;
     private String confirmPass;
 
     @Inject
     private ParkingDAO parkingDAO;
+
+    @PostConstruct
+    public void init() {
+        username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
     public String getNewPass() {
         return newPass;
@@ -35,15 +60,19 @@ public class AccountMB {
     }
 
     public String changePassword() {
-        String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         ParkingUser parkingUser = parkingDAO.findUserByName(username).orElseThrow(RuntimeException::new);
         parkingDAO.changeUserPassword(parkingUser.getId(), newPass);
 
-        return "dashboard";
+        return "/employee/dashboard.xhtml";
     }
 
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/login.xhtml?faces-redirect=true";
+        return "/employee/dashboard.xhtml?faces-redirect=true";
+    }
+
+    public boolean isAdmin() {
+        ParkingUser parkingUser = parkingDAO.findUserByName(username).orElseThrow(RuntimeException::new);
+        return UserType.ADMIN.equals(parkingUser.getUserType());
     }
 }

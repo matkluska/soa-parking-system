@@ -1,9 +1,6 @@
 package pl.edu.agh.soa.model;
 
 import javax.persistence.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +10,8 @@ import java.util.Set;
 @Entity
 @Table(name = "parking_user", schema = "parking")
 @NamedQueries({
+        @NamedQuery(name = "User.findAllUser",
+                query = "select u from ParkingUser u"),
         @NamedQuery(name = "User.findByArea",
                 query = "select u from ParkingUser u where u.area = :area"),
         @NamedQuery(name = "User.findByName",
@@ -53,12 +52,7 @@ public class ParkingUser {
     }
 
     public void setPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            this.password = Base64.getEncoder().encodeToString(md.digest(password.getBytes()));
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+        this.password = password;
     }
 
     @Enumerated(EnumType.STRING)

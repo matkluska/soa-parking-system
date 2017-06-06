@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>Employees</title>
+</h:head>
+<h:body>
+    <f:view locale="#{languageMB.locale}">
+        <b:navBar brand="#{msg['parkingSystem']}" brandHref="dashboard.xhtml">
+            <b:navbarLinks>
+                <b:navLink value="#{msg['dashboard']}" href="/parkingdashboard/employee/dashboard.xhtml"/>
+                <b:navLink value="#{msg['myAccount']}" href="/parkingdashboard/employee/my_account.xhtml"/>
+                <c:if test="#{accountMB.admin}">
+                    <b:navLink value="#{msg['employees']}" href="/parkingdashboard/admin/employees.xhtml"/>
+                </c:if>
+            </b:navbarLinks>
+            <b:form styleClass="nav navbar-form navbar-right">
+                <b:commandButton value="#{msg['logout']}" action="#{accountMB.logout}"/>
+            </b:form>
+            <b:form styleClass="nav navbar-form navbar-right">
+                <b:selectOneMenu value="#{languageMB.locale}" onchange="submit()"
+                                 valueChangeListener="#{languageMB.countryLocaleCodeChanged}">
+                    <f:selectItems value="#{languageMB.countriesInMap}"/>
+                </b:selectOneMenu>
+            </b:form>
+        </b:navBar>
+        <p/>
+        <b:container>
+            <p>
+                <b:form>
+                    <b:row>
+                        <b:column mediumScreen="2">
+                            <h:outputLabel for="userIds" value="#{msg['username']} : "/>
+
+                        </b:column>
+                        <b:column mediumScreen="4">
+                            <b:selectOneMenu id="userIds" value="#{accountMB.username}">
+                                <f:selectItems value="#{employeesMB.accounts}" var="account"
+                                               itemLabel="#{account.username}"
+                                               itemValue="#{account.username}"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                        <b:column mediumScreen="4">
+                            <h:message for="userIds" style="color: red;"/>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column mediumScreen="2">
+                            <h:outputLabel for="new_password" value="#{msg['newPassword']} : "/>
+
+                        </b:column>
+                        <b:column mediumScreen="4">
+                            <b:inputSecret id="new_password" value="#{accountMB.newPass}" required="true"
+                                           requiredMessage="#{msg['enterNewPassword']}">
+                                <f:validator validatorId="passwordEqualityValidator"/>
+                                <f:attribute name="confirmPassword" value="#{confirmPass}"/>
+                            </b:inputSecret>
+                        </b:column>
+                        <b:column mediumScreen="4">
+                            <h:message for="new_password" style="color: red;"/>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column mediumScreen="2">
+                            <h:outputLabel for="confirmPassword" value="#{msg['confirmPassword']} : "/>
+                        </b:column>
+                        <b:column mediumScreen="4">
+                            <b:inputSecret id="confirmPassword" required="true"
+                                           binding="#{confirmPass}"
+                                           requiredMessage="#{msg['enterConfirmPassword']}"/>
+                        </b:column>
+                        <b:column mediumScreen="4">
+                            <b:message for="confirmPassword" style="color: red;"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column mediumScreen="2">
+                            <b:commandButton action="#{accountMB.changePassword}" value="#{msg['change']}"
+                                             look="primary"/>
+                        </b:column>
+                    </b:row>
+                </b:form>
+            </p>
+            <br/>
+        </b:container>
+    </f:view>
+</h:body>
+</html>

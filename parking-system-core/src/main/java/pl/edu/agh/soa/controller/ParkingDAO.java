@@ -19,9 +19,13 @@ public interface ParkingDAO {
 
     List<Place> findAllPlaces();
 
+    List<Place> findAllPlacesFromArea(long areaId);
+
     Optional<Place> findOnePlaceById(long placeId);
 
     void invalidateTicket(long ticketId);
+
+    List<ParkingUser> findAllUsers();
 
     List<ParkingUser> findUsersByArea(long areaId);
 

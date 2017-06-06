@@ -11,6 +11,7 @@ import java.util.Set;
 @Table(schema = "parking")
 @NamedQueries({
         @NamedQuery(name = "Place.findAll", query = "SELECT p from Place p"),
+        @NamedQuery(name = "Place.findAllFromArea", query= "select p from Place p join fetch p.parkingMeter pm join fetch pm.area a where a.areaId = :area"),
         @NamedQuery(name = "Place.findAllWithIncidentsAfter", query = "SELECT p from Place p join fetch p.incidents i where i.timeInMillis > :time"),
         @NamedQuery(name = "Place.findAllWithTicketsAfter", query = "SELECT p from Place p join fetch p.tickets t where t.startTimeInMillis > :time"),
         @NamedQuery(name = "Place.getPlaceIds", query = "select p.placeId from Place p")

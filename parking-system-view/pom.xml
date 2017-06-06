@@ -26,6 +26,10 @@
             <groupId>net.bootsfaces</groupId>
             <artifactId>bootsfaces</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.picketbox</groupId>
+            <artifactId>jboss-security-spi</artifactId>
+        </dependency>
     </dependencies>
     <parent>
         <artifactId>parking-system</artifactId>
