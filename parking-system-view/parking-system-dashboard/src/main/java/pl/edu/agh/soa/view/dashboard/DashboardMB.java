@@ -50,6 +50,10 @@ public class DashboardMB {
     private PlaceMB toPlaceMB(Place place) {
         boolean isPaid = place.getTickets().stream()
                 .anyMatch(Ticket::isValid);
-        return new PlaceMB(place.getPlaceId(), place.isBusy(), isPaid);
+        boolean toCheck = false;
+        if (!isPaid && place.isBusy()) {
+            toCheck = parkingDAO.findIncidentByPlace(place).isPresent();
+        }
+        return new PlaceMB(place.getPlaceId(), place.isBusy(), isPaid, toCheck);
     }
 }

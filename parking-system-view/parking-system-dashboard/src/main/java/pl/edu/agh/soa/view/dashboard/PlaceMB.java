@@ -10,14 +10,16 @@ public class PlaceMB {
     private long id;
     private boolean isBusy;
     private boolean isPaid;
+    private boolean toCheck;
 
     public PlaceMB() {
     }
 
-    public PlaceMB(long id, boolean isBusy, boolean isPaid) {
+    public PlaceMB(long id, boolean isBusy, boolean isPaid, boolean toCheck) {
         this.id = id;
         this.isBusy = isBusy;
         this.isPaid = isPaid;
+        this.toCheck = toCheck;
     }
 
     public long getId() {
@@ -42,6 +44,14 @@ public class PlaceMB {
 
     public void setPaid(boolean paid) {
         isPaid = paid;
+    }
+
+    public boolean isToCheck() {
+        return toCheck;
+    }
+
+    public void setToCheck(boolean toCheck) {
+        this.toCheck = toCheck;
     }
 
     @Override

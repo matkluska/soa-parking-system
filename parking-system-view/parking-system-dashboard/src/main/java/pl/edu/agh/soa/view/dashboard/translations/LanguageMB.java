@@ -21,8 +21,8 @@ public class LanguageMB {
 
     static {
         countries = new LinkedHashMap<>();
-        countries.put("English", Locale.ENGLISH);
         countries.put("Polski", Locale.forLanguageTag("pl"));
+        countries.put("English", Locale.ENGLISH);
     }
 
     @PostConstruct

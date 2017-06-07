@@ -10,36 +10,37 @@
 <h:body>
     <b:container>
         <p/>
-        <div class="row">
-            <h3>Bad credentials, try again: </h3>
-        </div>
-        <form method="post" action="j_security_check">
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="j_username">Username: </label>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <input type="text" name="j_username" id="j_username" class="form-control bf-required"/>
+        <b:panel title="Bad credentials, try again:" look="danger" collapsible="false"
+                 styleClass="col-md-offset-3 col-md-5">
+            <p/>
+            <form method="post" class="center-block" action="j_security_check">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-3">
+                        <label for="j_username">Username: </label>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input type="text" name="j_username" id="j_username" class="form-control bf-required"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="j_password">Password: </label>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <input type="password" name="j_password" id="j_password" class="form-control bf-required"/>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-3">
+                        <label for="j_password">Password: </label>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input type="password" name="j_password" id="j_password" class="form-control bf-required"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                <div class="row">
+                    <div class="col-md-offset-5 col-md-1">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </b:panel>
     </b:container>
 </h:body>
 </html>

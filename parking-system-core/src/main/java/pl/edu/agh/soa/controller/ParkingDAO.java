@@ -33,6 +33,8 @@ public interface ParkingDAO {
 
     List<Incident> findIncidentsAfter(long timeInMillis);
 
+    Optional<Incident> findIncidentByPlace(Place place);
+
     List<Ticket> findTicketsAfter(long timeInMillis);
 
     List<ParkingUser> findUsersWithIncidentsAfter(long timeInMillis);

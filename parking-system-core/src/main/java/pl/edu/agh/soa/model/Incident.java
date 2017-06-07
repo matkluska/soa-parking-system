@@ -9,7 +9,9 @@ import javax.persistence.*;
 @Table(schema = "parking")
 @NamedQueries({
         @NamedQuery(name = "Incident.findAfter",
-                query = "select i from Incident i where i.timeInMillis > :time")
+                query = "select i from Incident i where i.timeInMillis > :time"),
+        @NamedQuery(name = "Incident.findByPlace",
+                query = "select i from Incident i where i.place=:place order by i.timeInMillis desc")
 })
 public class Incident {
     private long id;

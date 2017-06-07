@@ -119,6 +119,15 @@ public class DBParkingDAO implements ParkingDAO {
     }
 
     @Override
+    public Optional<Incident> findIncidentByPlace(Place place) {
+        return em.createNamedQuery("Incident.findByPlace", Incident.class)
+                .setParameter("place", place)
+                .setMaxResults(1)
+                .getResultList().stream()
+                .findFirst();
+    }
+
+    @Override
     public List<Ticket> findTicketsAfter(long timeInMillis) {
         return em.createNamedQuery("Ticket.findAfter", Ticket.class)
                 .setParameter("time", timeInMillis)
